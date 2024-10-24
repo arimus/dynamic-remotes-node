@@ -1,0 +1,4 @@
+.idea
+node_modules
+app1/dist
+app2/dist

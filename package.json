@@ -1,0 +1,29 @@
+{
+  "name": "dynamic-remotes-node",
+  "description": "Dynamic Remotes on server side with Node Federation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "echo 'fixing hot-reload.js' && cp hot-reload.js node_modules/@module-federation/node/dist/src/utils/hot-reload.js",
+    "app1": "cd app1 && webpack build --config webpack.config.js && node dist/main.js",
+    "app2": "cd app2 && webpack serve --config webpack.config.js",
+    "start": "concurrently 'pnpm run app2' 'sleep 5 && pnpm run app1'"
+  },
+  "dependencies": {
+    "@module-federation/enhanced": "0.6.12",
+    "@module-federation/node": "2.6.0",
+    "@module-federation/runtime": "0.6.12",
+    "@rspack/cli": "1.0.14",
+    "@rspack/core": "1.0.14",
+    "@rspack/dev-server": "1.0.9",
+    "concurrently": "^8.0.1",
+    "rimraf": "^5.0.5",
+    "webpack": "5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "kill-port": "2.0.1"
+  }
+}
