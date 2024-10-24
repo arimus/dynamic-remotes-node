@@ -1,6 +1,7 @@
 const { UniversalFederationPlugin } = require('@module-federation/node');
 const webpack = require('webpack');
 const path = require("path");
+
 module.exports = {
   entry: ['./index.js', 'webpack/hot/poll?1000'],
   mode: 'development',

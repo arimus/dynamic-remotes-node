@@ -1,12 +1,11 @@
 const { UniversalFederationPlugin } = require('@module-federation/node');
 const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: ['./index.js', 'webpack/hot/poll?1000'],
   mode: 'development',
   target: 'async-node',
-  externals: [nodeExternals({ allowlist: ['webpack/hot/poll?1000'] })],
+  externals: [],
   output: {
     publicPath: 'http://localhost:3001/',
     library: { type: 'commonjs-module' },
