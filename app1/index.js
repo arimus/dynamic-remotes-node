@@ -3,26 +3,28 @@ import { revalidate } from '@module-federation/node/utils';
 
 console.log('hello from host app1');
 
-init({
-  name: 'app1',
-  remotes: [
-    {
-      name: 'app2',
-      entry: 'http://localhost:3002/remoteEntry.js',
-    },
-  ],
-});
+let instance;
 
-loadRemote('app2/sample').then(sample => {
-  // if (process.env.TEST) {
-  //   if (sample === 'dynamically consumed from app2') {
-  //     process.exit(0);
-  //   } else {
-  //     process.exit(1);
-  //   }
-  // }
-  console.log('loaded sample', sample);
-});
+function initAndLoad() {
+  if (instance) {
+    instance.moduleCache.clear();
+  }
+  instance = init({
+    name: 'app1',
+    remotes: [
+      {
+        name: 'app2',
+        entry: 'http://localhost:3002/remoteEntry.js',
+      },
+    ],
+  });
+
+  loadRemote('app2/sample').then(sample => {
+    console.log('loaded sample', sample);
+  });
+}
+
+initAndLoad();
 
 setInterval(async () => {
   console.log('host(): checking for updates');
@@ -36,9 +38,7 @@ setInterval(async () => {
   if (shouldReload) {
     // reload the server
     console.log('host(): should reload');
-    loadRemote('app2/sample').then(sample => {
-      console.log('reloaded sample:', sample);
-    });
+    initAndLoad();
   } else {
     console.log('host(): should not reload');
   }
