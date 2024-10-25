@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@module-federation/enhanced": "0.6.13",
-    "@module-federation/node": "2.6.0",
+    "@module-federation/node": "2.6.1",
     "@module-federation/runtime": "0.6.13",
     "@rspack/cli": "1.0.14",
     "@rspack/core": "1.0.14",
