@@ -1,14 +1,29 @@
 const { loadRemote, init } = require('@module-federation/runtime');
-import { revalidate } from '@module-federation/node/utils';
+import {performReload, revalidate} from '@module-federation/node/utils';
 
 console.log('hello from host app1');
 
 let instance;
 
-function initAndLoad() {
-  if (instance) {
-    instance.moduleCache.clear();
-  }
+async function initAndLoad() {
+  // console.log('clearing global.global.__FEDERATION__.__INSTANCES__', global.__FEDERATION__.__INSTANCES__?.[0]);
+  // Clear entries from __GLOBAL_LOADING_REMOTE_ENTRY__
+  // if (global.__GLOBAL_LOADING_REMOTE_ENTRY__) {
+  //   for (const key in global.__GLOBAL_LOADING_REMOTE_ENTRY__) {
+  //     console.log('deleting key', key);
+  //     if (global.__GLOBAL_LOADING_REMOTE_ENTRY__.hasOwnProperty(key)) {
+  //       delete global.__GLOBAL_LOADING_REMOTE_ENTRY__[key];
+  //     }
+  //   }
+  // }
+
+  // if (instance) {
+  //   console.log('clearing module cache');
+  //   instance.moduleCache.clear();
+  // }
+
+  await performReload(true)
+
   instance = init({
     name: 'app1',
     remotes: [
@@ -22,6 +37,8 @@ function initAndLoad() {
   loadRemote('app2/sample').then(sample => {
     console.log('loaded sample', sample);
   });
+
+  // console.log('NOW global.__GLOBAL_LOADING_REMOTE_ENTRY__', global.__GLOBAL_LOADING_REMOTE_ENTRY__?.[0]);
 }
 
 initAndLoad();

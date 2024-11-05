@@ -10,9 +10,9 @@
     "start": "concurrently 'pnpm run app2' 'sleep 5 && pnpm run app1'"
   },
   "dependencies": {
-    "@module-federation/enhanced": "0.6.13",
-    "@module-federation/node": "2.6.1",
-    "@module-federation/runtime": "0.6.13",
+    "@module-federation/enhanced": "0.0.0-next-20241105211652",
+    "@module-federation/node": "0.0.0-next-20241105211652",
+    "@module-federation/runtime": "0.0.0-next-20241105211652",
     "@rspack/cli": "1.0.14",
     "@rspack/core": "1.0.14",
     "@rspack/dev-server": "1.0.9",

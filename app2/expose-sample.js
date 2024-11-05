@@ -1,1 +1,1 @@
-module.exports = 'dynamically consumed from app2 test5';
+module.exports = 'dynamically consumed from app2 test20';
